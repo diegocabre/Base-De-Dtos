@@ -1,60 +1,55 @@
-import React, { useState } from "react";
 
-const Formulario = ({}) => {
-  const [nombre, setNombre] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [edad, setEdad] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [telefono, setTelefono] = useState("");
+import { useState } from 'react'
+import Alert from './Alert';
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+export default function Formulario({ agregarColaborador }) {
+    const [datos, setDatos] = useState({
+        nombre: '',
+        correo: '',
+        edad: '',
+        cargo: '',
+        telefono: '',
+    });
 
-    const nuevoColaborador = {
-      nombre,
-      correo,
-      edad,
-      cargo,
-      telefono,
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setDatos({
+            ...datos,
+            [name]: value
+        })
     };
 
-    agregarColaborador(nuevoColaborador);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (datos.nombre.trim() === '' || datos.correo.trim() === '' || datos.edad.trim() === '' || datos.cargo.trim() === '' || datos.telefono.trim() === '') {
+            return (
+                <Alert tipo="danger" mensaje="Todos los campos son obligatorios" />
+            )
+        }
+        else {
+            agregarColaborador(datos);
+            setDatos({
+                nombre: '',
+                correo: '',
+                edad: '',
+                cargo: '',
+                telefono: '',
+            });
+        }
+    };
 
-    setNombre("");
-    setCorreo("");
-    setEdad("");
-    setCargo("");
-    setTelefono("");
-  };
+    return (
+        <form className="formulario" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Nombre" name="nombre" value={datos.nombre} onChange={handleChange} />
+            <input type="text" placeholder="Correo" name="correo" value={datos.correo} onChange={handleChange} />
+            <input type="text" placeholder="Edad" name="edad" value={datos.edad} onChange={handleChange} />
+            <input type="text" placeholder="Cargo" name="cargo" value={datos.cargo} onChange={handleChange} />
+            <input type="text" placeholder="Telefono" name="telefono" value={datos.telefono} onChange={handleChange} />
+            <button type="submit">Agregar</button>
+        </form>
+    )
+}
 
-  return (
-  <div className="container">
-    <h2>Nuevo colaborador</h2>
-    <form className="formulario" onSubmit={onSubmit}>
-        <input type="text" className="form-control" placeholder="Nombre y Apellido" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-        <input type="email" className="form-control" placeholder="Correo" value={correo} onChange={(e) => setCorreo(e.target.value)}/>
-        <input type="number" className="form-control" placeholder="Edad" value={edad} onChange={(e) => setEdad(e.target.value)} />
-        <input type="text" className="form-control" placeholder="Cargo" value={cargo} onChange={(e) => setCargo(e.target.value)} />
-        <input type="tel" className="form-control" placeholder="Número de Teléfono" value={telefono} onChange={(e) => {
-            
-            const input = e.target.value;
-            if (/^[0-9]*$/.test(input)) {
-                setTelefono(input);
-            }
-        }}
-        />
-        
-        <button type="submit" className="btn btn-color btn-no-hover">Agregar colaborador</button>
-        
-    </form>
-    
-    {alertMessage && (
-        <div className="d-flex justify-content-center mt-2">
-          <span className={`badge badge-${alertType}`}>{alertMessage}</span>
-        </div>
-      )}
- </div>
-  );
-};
 
 export default Formulario;
+

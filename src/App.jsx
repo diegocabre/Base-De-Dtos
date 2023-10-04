@@ -30,7 +30,7 @@ function App() {
           alertType={appAlertType}
         />
 <Listado/>
-<Buscador/>
+<Buscador onBuscar={filtrarColaboradores} />
 <Alert/>
 
 </>

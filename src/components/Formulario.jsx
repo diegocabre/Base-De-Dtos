@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Alert from './Alert';
 
-export default function Formulario({ agregarColaborador }) {
+export default function Formulario ({ agregarColaborador }) {
     const [datos, setDatos] = useState({
         nombre: '',
         correo: '',
@@ -50,6 +50,4 @@ export default function Formulario({ agregarColaborador }) {
     )
 }
 
-
-export default Formulario;
 

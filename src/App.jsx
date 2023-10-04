@@ -3,7 +3,7 @@ import {Formulario} from "./components/Formulario";
 import {Listado} from "./components/Listado"
 import {Buscador} from "./components/Buscador"
 import {Alert} from "./components/Alert"
-import {BaeColaboradores} from "./BaseColaboradores"
+import {BaseColaboradores} from "./BaseColaboradores"
 
 
 

@@ -26,6 +26,7 @@ export default function Formulario({ agregarColaborador, handleAlerta }) {
             return;
         }
         var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
         if (!regex.test(datos.correo)) {
             handleAlerta({
                 tipo: 'danger',

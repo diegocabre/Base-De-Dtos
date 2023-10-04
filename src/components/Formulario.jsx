@@ -1,8 +1,6 @@
 
 import { useState } from 'react'
-import Alert from './Alert';
-
-export default function Formulario ({ agregarColaborador }) {
+export default function Formulario({ agregarColaborador, handleAlerta }) {
     const [datos, setDatos] = useState({
         nombre: '',
         correo: '',
@@ -11,43 +9,77 @@ export default function Formulario ({ agregarColaborador }) {
         telefono: '',
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = e => {
         setDatos({
             ...datos,
-            [name]: value
+            [e.target.name]: e.target.value
         })
-    };
+    }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         if (datos.nombre.trim() === '' || datos.correo.trim() === '' || datos.edad.trim() === '' || datos.cargo.trim() === '' || datos.telefono.trim() === '') {
-            return (
-                <Alert tipo="danger" mensaje="Todos los campos son obligatorios" />
-            )
+            handleAlerta({
+                tipo: 'danger',
+                mensaje: 'Todos los campos son obligatorios'
+            })
+            return;
         }
-        else {
-            agregarColaborador(datos);
-            setDatos({
-                nombre: '',
-                correo: '',
-                edad: '',
-                cargo: '',
-                telefono: '',
-            });
+        var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!regex.test(datos.correo)) {
+            handleAlerta({
+                tipo: 'danger',
+                mensaje: 'El correo no es valido'
+            })
+            return;
         }
-    };
+
+        if (datos.edad < 0 || isNaN(datos.edad)) {
+            handleAlerta({
+                tipo: 'danger',
+                mensaje: 'La edad debe ser un numero positivo'
+            })
+            return;
+        }
+
+        if (datos.telefono < 0 || isNaN(datos.telefono)) {
+            handleAlerta({
+                tipo: 'danger',
+                mensaje: 'El telefono debe ser un numero positivo'
+            })
+            return;
+        }
+        agregarColaborador({ ...datos });
+        setDatos({
+            nombre: '',
+            correo: '',
+            edad: '',
+            cargo: '',
+            telefono: '',
+        })
+    }
 
     return (
-        <form className="formulario" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Nombre" name="nombre" value={datos.nombre} onChange={handleChange} />
-            <input type="text" placeholder="Correo" name="correo" value={datos.correo} onChange={handleChange} />
-            <input type="text" placeholder="Edad" name="edad" value={datos.edad} onChange={handleChange} />
-            <input type="text" placeholder="Cargo" name="cargo" value={datos.cargo} onChange={handleChange} />
-            <input type="text" placeholder="Telefono" name="telefono" value={datos.telefono} onChange={handleChange} />
-            <button type="submit">Agregar</button>
-        </form>
+        <div>
+            <h1 className="tituloFormulario">Agrega un Colaborador</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <input type="text" placeholder="Escribe tu Nombre" className="form-control" name="nombre" value={datos.nombre} onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                    <input type="email" placeholder="Escribe tu Correo" className="form-control" name="correo" value={datos.correo} onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                    <input type="text" placeholder="Escribe tu Edad" className="form-control" name="edad" value={datos.edad} onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                    <input type="text" placeholder="Escribe tu Cargo" className="form-control" name="cargo" value={datos.cargo} onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                    <input type="text" placeholder="Escribe tu Telefono" className="form-control" name="telefono" value={datos.telefono} onChange={handleChange} />
+                </div>
+                <button type="submit" className="btn btn-primary">Agregar</button>
+            </form>
+        </div>
     )
 }
-
-

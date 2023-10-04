@@ -4,8 +4,8 @@ export default function Listado({colaboradores, eliminarColaborador}) {
         return <p className="alert alert-info">No hay colaboradores en la base de datos</p>
     } else {
     return (
-        <table className="table" border={"1"}>
-            <thead className="table-info">
+        <table className="table table-bordered">
+            <thead className="table-dark">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>

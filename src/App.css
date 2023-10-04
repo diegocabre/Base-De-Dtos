@@ -1,3 +1,8 @@
+.root{
+    height: 100%;
+    width: 100%;
+}
+
 .App{
     text-align: center;
     background-color: rgb(255, 255, 255);
@@ -17,4 +22,19 @@
     flex-direction: column;
     align-items: left;
     gap: 10px;
+}
+
+.table{
+    border: 2px solid black;
+}
+
+.buscador{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.nombre, .email, .cargo, .edad, .telefono{
+    height: 100%;
+    width: 100%;
 }

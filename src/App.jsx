@@ -12,12 +12,12 @@ function App() {
     const [colaboradores, setColaboradores] = useState([...BaseColaboradores]);
     const agregarColaborador = (newColaborador) => {
         setColaboradores(colaborador => [...colaborador, { ...newColaborador, id: index++ }]);
-        setAlerta({ tipo: 'success', mensaje: 'Colaborador agregado' });
+        setAlerta({ tipo: 'success', mensaje: 'Colaborador agregado correctamente' });
     }
 
     const eliminarColaborador = (id) => {
         setColaboradores(colaborador => colaborador.filter(colaborador => colaborador.id !== id));
-        setAlerta({ tipo: 'success', mensaje: 'Colaborador eliminado' });
+        setAlerta({ tipo: 'info', mensaje: 'Colaborador eliminado correctamente'});
     }
 
     const [alerta, setAlerta] = useState(null);
@@ -44,10 +44,10 @@ function App() {
                 <Buscador handleBuscador={handleBuscador} />
                 <h1 className="tituloListado">Base de datos de Colaboradores</h1>
                 <Listado colaboradores={filtrarColaboradores(colaboradores)} eliminarColaborador={eliminarColaborador} />
+                {alerta ? <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} /> : null}
             </div>
             <div>
                 <Formulario agregarColaborador={agregarColaborador} handleAlerta={handleAlerta} />
-                {alerta ? <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} /> : null}
             </div>
         </div>
     )

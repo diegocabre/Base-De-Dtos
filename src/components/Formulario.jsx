@@ -62,21 +62,22 @@ export default function Formulario({ agregarColaborador, handleAlerta }) {
     return (
         <div>
             <h1 className="tituloFormulario">Agrega un Colaborador</h1>
+            <img src="./src/assets/img/Colaboradores.jpg" alt="" className="img-fluid" style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '20px' }} />
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <input type="text" placeholder="Escribe tu Nombre" className="form-control" name="nombre" value={datos.nombre} onChange={handleChange} />
+                    <input type="text" placeholder="Armando Perez" className="nombre" name="nombre" value={datos.nombre} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="email" placeholder="Escribe tu Correo" className="form-control" name="correo" value={datos.correo} onChange={handleChange} />
+                    <input type="email" placeholder="tucorreo@correo.com" className="email" name="correo" value={datos.correo} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="text" placeholder="Escribe tu Edad" className="form-control" name="edad" value={datos.edad} onChange={handleChange} />
+                    <input type="text" maxLength={3} minLength={2} pattern='[0-9]*' placeholder="Escribe tu Edad" className="edad" name="edad" value={datos.edad} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="text" placeholder="Escribe tu Cargo" className="form-control" name="cargo" value={datos.cargo} onChange={handleChange} />
+                    <input type="text" placeholder="Desarrollador" className="cargo" name="cargo" value={datos.cargo} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="text" placeholder="Escribe tu Telefono" className="form-control" name="telefono" value={datos.telefono} onChange={handleChange} />
+                    <input type="text" maxLength={9} minLength={9} pattern='[0-9]*' placeholder="987654321" className="telefono" name="telefono" value={datos.telefono} onChange={handleChange} />
                 </div>
                 <button type="submit" className="btn btn-primary">Agregar</button>
             </form>

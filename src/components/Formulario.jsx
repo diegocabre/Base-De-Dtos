@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import Alert from './Alert';
 
@@ -48,3 +49,7 @@ export default function Formulario({ agregarColaborador }) {
         </form>
     )
 }
+
+
+export default Formulario;
+

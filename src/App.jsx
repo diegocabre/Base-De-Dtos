@@ -1,8 +1,10 @@
 import './App.css'
+
 import { BaseColaboradores } from './BaseColaboradores';
 import Listado from './components/Listado';
 import Alert from './components/Alert';
 import Formulario from './components/Formulario';
+
 
 function App() {
     const colaboradores = BaseColaboradores;
@@ -21,4 +23,15 @@ function App() {
     )
 }
 
+<>
+<Formulario
+          agregarColaborador={agregarColaborador}
+          alertMessage={appAlertMessage}
+          alertType={appAlertType}
+        />
+<Listado/>
+<Buscador/>
+<Alert/>
+
+</>
 export default App

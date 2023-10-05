@@ -50,6 +50,15 @@ export default function Formulario({ agregarColaborador, handleAlerta }) {
             })
             return;
         }
+
+        if (datos.edad < 18) {
+            handleAlerta({
+                tipo: 'danger',
+                mensaje: 'El colaborador debe ser mayor de 18 años'
+            })
+            return;
+        }
+
         agregarColaborador({ ...datos });
         setDatos({
             nombre: '',
@@ -72,7 +81,7 @@ export default function Formulario({ agregarColaborador, handleAlerta }) {
                     <input type="email" placeholder="tucorreo@correo.com" className="email" name="correo" value={datos.correo} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="text" maxLength={3} minLength={2} pattern='[0-9]*' placeholder="Escribe tu Edad" className="edad" name="edad" value={datos.edad} onChange={handleChange} />
+                    <input type="text" maxLength={2} minLength={2} pattern='[0-9]*' placeholder="Escribe tu Edad" className="edad" name="edad" value={datos.edad} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
                     <input type="text" placeholder="Desarrollador" className="cargo" name="cargo" value={datos.cargo} onChange={handleChange} />
